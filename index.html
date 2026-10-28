@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Toluwase Okunniga – QA Tester</title>
+<meta name="description" content="QA tester in London. ISTQB certified. I find the bugs before your customers do.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Instrument+Sans:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F1FF;--surface:#FFFFFF;--ink:#1B1545;--muted:#5E5A85;--line:#DDD6F7;--grid:rgba(91,61,245,.09);--accent:#5B3DF5;--on:#FFFFFF;--pass:#0A8F73;--bug:#D9254C;--term:#120D33;--tink:#EDE9FF;--tmut:#8F88C4;--tpass:#3DF2C4;--tbug:#FF6B8B;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0D0922;--surface:#171040;--ink:#EFEBFF;--muted:#A59FD0;--line:#2B2361;--grid:rgba(155,131,255,.1);--accent:#9B83FF;--on:#0D0922;--pass:#3DF2C4;--bug:#FF6B8B;--term:#070418;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0D0922;--surface:#171040;--ink:#EFEBFF;--muted:#A59FD0;--line:#2B2361;--grid:rgba(155,131,255,.1);--accent:#9B83FF;--on:#0D0922;--pass:#3DF2C4;--bug:#FF6B8B;--term:#070418;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 "Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative}
+a{color:inherit;text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3,p{margin:0}
+h1,h2{font-family:"Unbounded",system-ui,sans-serif;font-weight:700;letter-spacing:-.03em}
+h1{font-size:clamp(2.1rem,5.4vw,3.9rem);line-height:1.08}
+h2{font-size:clamp(1.5rem,3.2vw,2.3rem);line-height:1.15;max-width:22ch}
+h3{font-size:1.15rem;font-weight:600}
+.gridbg{position:absolute;inset:0 0 auto 0;height:760px;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:48px 48px;-webkit-mask-image:linear-gradient(#000 35%,transparent);mask-image:linear-gradient(#000 35%,transparent);pointer-events:none}
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0;font-weight:600;position:relative}
+.top a{text-decoration:none}
+.top a:hover{color:var(--accent)}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:40px 0 104px;position:relative}
+.sub{font-size:1.2rem;color:var(--muted);max-width:36ch;margin:24px 0 30px}
+.btns{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-block;padding:13px 22px;border-radius:10px;background:var(--accent);color:var(--on);font-weight:600;text-decoration:none;border:1px solid var(--accent)}
+.btn:hover{filter:brightness(1.08)}
+.btn.alt{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.alt:hover{background:var(--surface);filter:none}
+.badge{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-size:.95rem}
+.badge i{width:8px;height:8px;border-radius:50%;background:var(--pass)}
+.runner{background:var(--term);color:var(--tink);border:1px solid var(--line);border-radius:14px;font:400 .88rem/1.5 "JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;overflow:hidden}
+.rbar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid rgba(143,136,196,.25)}
+.rbar i{width:10px;height:10px;border-radius:50%;background:rgba(143,136,196,.4)}
+.rbar span{flex:1;margin-left:8px;color:var(--tmut)}
+.rbar button{font:inherit;color:var(--tink);background:transparent;border:1px solid rgba(143,136,196,.45);border-radius:6px;padding:3px 10px;cursor:pointer}
+.rbar button:hover{background:rgba(143,136,196,.2)}
+#tests{list-style:none;margin:0;padding:14px 16px;min-height:236px}
+#tests li{padding:5px 0;display:grid;grid-template-columns:1.4rem 1fr}
+#tests .ok{color:var(--tpass)}
+#tests .no{color:var(--tbug)}
+#tests .d{grid-column:2;color:var(--tmut);padding-top:2px}
+#tests .d b{color:var(--tbug);font-weight:600}
+@media (prefers-reduced-motion:no-preference){#tests li{animation:in .3s ease both}@keyframes in{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}}
+#sum{padding:12px 16px;border-top:1px solid rgba(143,136,196,.25);color:var(--tmut);min-height:46px}
+#sum b{color:var(--tpass);font-weight:600}#sum u{color:var(--tbug);text-decoration:none;font-weight:600}
+.cap{margin-top:12px;font-size:.9rem;color:var(--muted)}
+section{padding:0 0 108px;position:relative}
+section>h2{margin-bottom:40px}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.steps li{position:relative;border-top:2px solid var(--line);padding-top:26px}
+.steps li::before{content:"";position:absolute;left:0;top:-8px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--bg)}
+.steps b{font-family:"Unbounded",system-ui,sans-serif;font-size:.9rem;color:var(--accent)}
+.steps h3{margin:6px 0}
+.steps p{color:var(--muted)}
+.work{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px}
+.tile.lead{grid-column:1/-1;background:var(--accent);color:var(--on);border-color:var(--accent)}
+.tile h3{font-family:"Unbounded",system-ui,sans-serif;font-weight:500;font-size:1.25rem;letter-spacing:-.02em}
+.tile p{margin-top:12px;max-width:62ch;color:var(--muted)}
+.tile.lead p{color:inherit;opacity:.88}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tags span{font-size:.9rem;border:1px solid var(--line);border-radius:6px;padding:3px 12px}
+.tile.lead .tags span{border-color:currentColor}
+.tile p.nda{font-size:.9rem;opacity:.75}
+.kit{display:flex;flex-wrap:wrap;gap:10px}
+.kit span{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 18px;font-weight:600}
+.contact{background:var(--term);color:var(--tink);border:1px solid var(--line);border-radius:20px;padding:clamp(32px,6vw,72px);position:relative;overflow:hidden}
+.contact::after{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;border:2px solid var(--accent);opacity:.5;box-shadow:0 0 0 36px rgba(155,131,255,.08),0 0 0 72px rgba(155,131,255,.05)}
+.contact h2{margin-bottom:14px}
+.contact p{max-width:40ch;margin-bottom:28px;color:var(--tmut)}
+.contact .btn{background:var(--tink);color:#120D33;border-color:var(--tink)}
+.contact .btn.alt{background:transparent;color:var(--tink);border-color:rgba(143,136,196,.5)}
+footer{padding:36px 0 56px;color:var(--muted);font-size:.9rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:900px){.hero{grid-template-columns:1fr;gap:44px;padding-bottom:76px}.steps{grid-template-columns:1fr 1fr;row-gap:36px}.work{grid-template-columns:1fr}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}.runner{font-size:.8rem}}
+</style>
+</head>
+<body>
+<div class="gridbg" aria-hidden="true"></div>
+<div class="wrap">
+
+<nav class="top" aria-label="Main"><a href="#top">Toluwase Okunniga</a><a href="mailto:okunnigatoluwase@gmail.com">Email me</a></nav>
+
+<header class="hero" id="top">
+  <div>
+    <h1>I find the bugs before your customers do.</h1>
+    <p class="sub">QA tester in London with a frontend background, so I know exactly where the browser lets people down.</p>
+    <div class="btns">
+      <a class="btn" href="mailto:okunnigatoluwase@gmail.com">Get in touch</a>
+      <a class="btn alt" href="#work">See my work</a>
+    </div>
+    <p class="badge"><i></i><span><b>ISTQB Certified Tester</b>, Foundation Level</span></p>
+  </div>
+  <div>
+    <div class="runner" role="group" aria-label="Demo test run">
+      <div class="rbar"><i></i><i></i><i></i><span>checkout.spec</span><button type="button" id="rerun">Run again</button></div>
+      <ul id="tests" aria-live="polite"></ul>
+      <div id="sum"></div>
+    </div>
+    <p class="cap">A demo test run. The failing test is the kind of bug I report.</p>
+  </div>
+</header>
+
+<section id="how">
+  <h2>How I test</h2>
+  <ol class="steps">
+    <li><b>01</b><h3>Read the requirement</h3><p>I work out what the feature should do and where the unclear parts are.</p></li>
+    <li><b>02</b><h3>Break the happy path</h3><p>Empty fields, odd input, double clicks, slow connections and small screens.</p></li>
+    <li><b>03</b><h3>Write it up clearly</h3><p>Steps, expected against actual, screenshots and console logs, so it gets fixed.</p></li>
+    <li><b>04</b><h3>Check the fix</h3><p>I retest the fix and run a regression pass around it.</p></li>
+  </ol>
+</section>
+
+<section id="work">
+  <h2>Selected work</h2>
+  <div class="work">
+    <article class="tile lead">
+      <h3>Live client testing on Applause</h3>
+      <p>Exploratory, functional and regression testing of live websites for global fashion and luxury retail brands, plus broadband payment journeys for a UK telecoms provider. Real devices, real browsers, and bug reports with reproduction steps, screenshots and console logs.</p>
+      <div class="tags"><span>Exploratory</span><span>Cross-browser</span><span>Payments</span><span>Checkout</span><span>Console logs</span></div>
+      <p class="nda">Client names are covered by confidentiality agreements.</p>
+    </article>
+    <article class="tile">
+      <h3>E-commerce application</h3>
+      <p>Test cases for registration, login, product search, cart, checkout and order management, followed by retesting of fixes.</p>
+      <div class="tags"><span>Functional</span><span>Smoke</span><span>Regression</span></div>
+    </article>
+    <article class="tile">
+      <h3>OrangeHRM</h3>
+      <p>Requirement-based testing of the employee, leave, recruitment and admin modules of the public demo application.</p>
+      <div class="tags"><span>Test design</span><span>Defect tracking</span><span>Web app</span></div>
+    </article>
+  </div>
+</section>
+
+<section id="toolkit">
+  <h2>Toolkit</h2>
+  <div class="kit"><span>Jira</span><span>Postman</span><span>Applause</span><span>Browser DevTools</span><span>Git and GitHub</span><span>Trello</span><span>Agile and Scrum</span><span>HTML, CSS, JavaScript</span></div>
+</section>
+
+<section id="contact">
+  <div class="contact">
+    <h2>Let’s talk quality.</h2>
+    <p>Send me a message and I’ll reply quickly.</p>
+    <div class="btns">
+      <a class="btn" href="mailto:okunnigatoluwase@gmail.com">Email me</a>
+      <a class="btn alt" href="https://www.linkedin.com/in/toluwase-okunniga-bb831019b/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer><span>Toluwase Okunniga</span><span>London, United Kingdom</span></footer>
+</div>
+
+<script>
+(function(){
+  var tests=[
+    {n:"guest can add a product to the basket",ok:true},
+    {n:"valid UK phone number is accepted",ok:true},
+    {n:"incomplete phone number is rejected",ok:false,d:"expected: an error asking for a full number<br>received: <b>order accepted with “07”</b>"},
+    {n:"postcode error explains the format",ok:true},
+    {n:"place order disables after one click",ok:true}
+  ];
+  var list=document.getElementById("tests"),sum=document.getElementById("sum"),btn=document.getElementById("rerun"),timers=[];
+  var still=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function run(){
+    timers.forEach(clearTimeout);timers=[];
+    list.innerHTML="";sum.textContent="running…";
+    tests.forEach(function(t,i){
+      timers.push(setTimeout(function(){
+        var li=document.createElement("li");
+        var m=document.createElement("span");m.className=t.ok?"ok":"no";m.textContent=t.ok?"✓":"✕";
+        var s=document.createElement("span");s.textContent=t.n;
+        li.appendChild(m);li.appendChild(s);
+        if(t.d){var d=document.createElement("div");d.className="d";d.innerHTML=t.d;li.appendChild(d);}
+        list.appendChild(li);
+        if(i===tests.length-1){sum.innerHTML="<b>4 passed</b>, <u>1 failed</u>. Bug reported with steps, screenshot and console log.";}
+      },still?0:(i+1)*600));
+    });
+  }
+  btn.addEventListener("click",run);
+  run();
+})();
+</script>
+</body>
+</html>
